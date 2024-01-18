@@ -57,10 +57,10 @@ const main = async () => {
 
     console.log("--------------------Submit a message to the topic--------------------");
 
-    const submitMessageTx = new TopicMessageSubmitTransaction({
-        topicId: topicId,
-        message: "Hello, this is my first message!"
-    }).freezeWith(client);
+    const submitMessageTx = new TopicMessageSubmitTransaction()
+        .setTopicId(topicId)
+        .setMessage("Hello, this is my first message!")
+        .freezeWith(client);
     // To submit a message in a topic we shoul sign it with the submit key    
     const signSubmitMessageTx = await submitMessageTx.sign(submitKey);
     const executeSubmitMessageTx = await signSubmitMessageTx.execute(client);
